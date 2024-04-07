@@ -1,15 +1,33 @@
+using Amazon;
+using Amazon.SecretsManager;
+using Amazon.SecretsManager.Model;
+using Microsoft.EntityFrameworkCore;
+using SovaCloud.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+
+IAmazonSecretsManager client = new AmazonSecretsManagerClient(RegionEndpoint.EUCentral1);
+
+GetSecretValueRequest request = new GetSecretValueRequest
+{
+    SecretId = "Development_SovaCloudStorage_Database__ConnectionString"
+};
+
+GetSecretValueResponse response = await client.GetSecretValueAsync(request);
+
+string connectionStringSecret = response.SecretString;
+
+builder.Services.AddDbContext<SovaCloudDbContext>(options =>
+    options.UseSqlServer(connectionStringSecret));
+
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

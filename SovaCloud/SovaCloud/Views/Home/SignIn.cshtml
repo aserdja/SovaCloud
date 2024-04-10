@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "SignIn";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Sign In</h1>
+        <form action="/submit_login" method="post">
+            <div>
+                <label for="email">E-mail:</label>
+                <b></b>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <b></b>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <input type="submit" value="Sign In">
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
+

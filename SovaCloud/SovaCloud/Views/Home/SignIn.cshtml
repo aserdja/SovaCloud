@@ -5,26 +5,115 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body {
+            font-family: "Montserrat", sans-serif;
+        }
+
+        input {
+            height: 45px;
+            width: 100%;
+            border: 2px solid #E9F2FF;
+            border-radius: 5px;
+            padding-left: 25px;
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid #C1D9FD;
+        }
+
+        .circle {
+            position: absolute;
+            z-index: 1;
+            width: 534px;
+            height: 534px;
+            border-radius: 50%;
+            background: #F7FAFF;
+            box-shadow: 0px 4px 70px 6px rgba(217, 229, 255, 0.25);
+        }
+
+        .register-form-container {
+            width: 100%;
+            position: relative;
+            max-width: 415px;
+            z-index: 2;
+            background: #FFFFFF;
+            box-shadow: 0px 6px 50px rgba(217, 229, 255, 0.7);
+            border-radius: 20px;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 38px;
+            padding-bottom: 38px;
+        }
+
+        .form-field {
+            margin-bottom: 13px;
+        }
+
+        .button {
+            font-weight: bold;
+            font-size: 14px;
+            display: block;
+            height: 45px;
+            width: 100%;
+            background: #247FFF;
+            border-radius: 5px;
+            color: #FFF;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 45px;
+            margin-bottom: 13px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0D6CF2;
+        }
+
+        a.button {
+            text-decoration: none;
+        }
+
+        .registration-button {
+            color: #C6CFDC;
+            background: #F2F6FF;
+            margin-top: 30px;
+        }
+        .registration-button:hover {
+            background: #E2E6F0;
+            color: #FFF;
+        }
+    </style>
+</head>
 <body>
     <div class="text-center">
         <h1 class="display-4">Sign In</h1>
-        <form action="/submit_login" method="post">
-            <div>
-                <label for="email">E-mail:</label>
-                <b></b>
-                <input type="email" id="email" name="email" required>
+        <div class="circle"></div>
+        <div class="register-form-container">
+            <div class="form-field">
+                <input type="text" placeholder="E-mail"/>
             </div>
-            <div>
-                <label for="password">Password:</label>
-                <b></b>
-                <input type="password" id="password" name="password" required>
+            <div class="form-field">
+                <input type="text" placeholder="Password"/>
             </div>
-            <div>
-                <input type="submit" value="Sign In">
+            <div class="form-buttons">
+                <button class="button">Sign In</button>
+                <a href="#" class="button registration-button">Don't have account? Create new one!</a>
             </div>
-        </form>
+        </div>
     </div>
-
 </body>
 </html>
 

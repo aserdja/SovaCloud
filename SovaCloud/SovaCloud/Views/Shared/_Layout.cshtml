@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SovaCloud.styles.css" asp-append-version="true" />
+    <style>
+        .right-links {
+            text-align: right;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -25,10 +30,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="YourFiles">Your files</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SignIn">Sign In</a>
-                        </li>
                     </ul>
+                    <div class="right-links">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SignIn">Sign In</a>
+                    </div>
                 </div>
             </div>
         </nav>

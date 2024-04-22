@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Views\SignIn\" />
+    <Folder Include="Views\SignUp\" />
   </ItemGroup>
 
 </Project>

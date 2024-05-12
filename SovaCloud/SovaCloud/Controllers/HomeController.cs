@@ -14,10 +14,6 @@ namespace SovaCloud.Controllers
             return View();
         }
 
-        public IActionResult YourFiles()
-        {
-            return View();
-        }
 
         public IActionResult SignIn()
         {
@@ -29,6 +25,13 @@ namespace SovaCloud.Controllers
             return View();
         }
 
+        [Authorize]
+        public IActionResult YourFiles()
+        {
+            return View();
+        }
+
+        [Authorize]
         public IActionResult HomeLogined(User user)
         {
             return View(user);

@@ -13,6 +13,13 @@ namespace SovaCloud.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Models.File> Files { get; set; }
         public DbSet<FileOwnership> FileOwnerships { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasIndex(x => x.EmailAddress)
+                .IsUnique();
+        }
     }
 }
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SovaCloud.Data;
 
@@ -11,9 +12,11 @@ using SovaCloud.Data;
 namespace SovaCloud.Migrations
 {
     [DbContext(typeof(SovaCloudDbContext))]
-    partial class SovaCloudDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240512173511_AddedEmailUniqueAttribute")]
+    partial class AddedEmailUniqueAttribute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

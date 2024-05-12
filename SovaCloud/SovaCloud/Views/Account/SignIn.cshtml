@@ -1,5 +1,7 @@
-﻿@{
-	ViewData["Title"] = "Sign Up";
+﻿@model User
+
+@{
+    ViewData["Title"] = "Sign In";
 }
 
 <!DOCTYPE html>
@@ -28,10 +30,10 @@
             padding-left: 25px;
         }
 
-            input:focus {
-                outline: none;
-                border: 2px solid #C1D9FD;
-            }
+        input:focus {
+            outline: none;
+            border: 2px solid #C1D9FD;
+        }
 
         .circle {
             position: absolute;
@@ -77,47 +79,49 @@
             cursor: pointer;
         }
 
-            .button:hover {
-                background-color: #0D6CF2;
-            }
+        .button:hover {
+            background-color: #0D6CF2;
+        }
 
         a.button {
             text-decoration: none;
         }
 
-        .authorization-button {
+        .registration-button {
             color: #C6CFDC;
             background: #F2F6FF;
             margin-top: 30px;
         }
-
-            .authorization-button:hover {
-                background: #E2E6F0;
-                color: #FFF;
-            }
+        .registration-button:hover {
+            background: #E2E6F0;
+            color: #FFF;
+        }
     </style>
 </head>
 <body>
     <div class="text-center">
-        <h1 class="display-4">Sign Up</h1>
+        <h1 class="display-4">Sign In</h1>
         <div class="circle"></div>
-        <div class="register-form-container">
-            <div class="form-field">
-                <input type="text" placeholder="E-mail" />
+        <form asp-controller="Account" asp-action="SignIn" method="post">
+            <div class="register-form-container">
+                <div class="form-field">
+                    <input type="email" asp-for="EmailAddress" placeholder="E-mail"/>
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                </div>
+                <div class="form-field">
+                    <input type="password" asp-for="Password" placeholder="Password"/>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-buttons">
+                    <button class="button" type="submit">Sign In</button>
+                    <a class="button registration-button" asp-area="" asp-controller="Account" asp-action="SignUp">
+                        Don't have an account? Create new one!
+                    </a>
+                </div>
             </div>
-            <div class="form-field">
-                <input type="text" placeholder="Password" />
-            </div>
-            <div class="form-field">
-                <input type="text" placeholder="Confirm Password" />
-            </div>
-            <div class="form-buttons">
-                <button class="button">Sign Up</button>
-                <a class="button authorization-button" asp-area="" asp-controller="Home" asp-action="SignIn">
-                    Already have an account? Let's Sign In!
-                </a>
-            </div>
-        </div>
+        </form>
+
     </div>
 </body>
 </html>
+

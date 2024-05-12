@@ -50,7 +50,7 @@ namespace SovaCloud.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Files");
+                    b.ToTable("Files", (string)null);
                 });
 
             modelBuilder.Entity("SovaCloud.Models.FileOwnership", b =>
@@ -73,7 +73,7 @@ namespace SovaCloud.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FileOwnerships");
+                    b.ToTable("FileOwnerships", (string)null);
                 });
 
             modelBuilder.Entity("SovaCloud.Models.User", b =>
@@ -97,7 +97,7 @@ namespace SovaCloud.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("SovaCloud.Models.FileOwnership", b =>

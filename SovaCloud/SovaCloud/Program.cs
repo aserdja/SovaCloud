@@ -3,12 +3,19 @@ using Amazon.SecretsManager;
 using Amazon.SecretsManager.Model;
 using Microsoft.EntityFrameworkCore;
 using SovaCloud.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddAuthentication(
+    CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option => {
+        option.LoginPath = "/Account/SignIn";
+        option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    });
 
 IAmazonSecretsManager client = new AmazonSecretsManagerClient(RegionEndpoint.EUCentral1);
 GetSecretValueRequest request = new GetSecretValueRequest
@@ -35,6 +42,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace SovaCloud.Controllers
 {
@@ -32,9 +33,12 @@ namespace SovaCloud.Controllers
         }
 
         [Authorize]
-        public IActionResult HomeLogined(User user)
+        public IActionResult HomeLogined()
         {
-            return View(user);
+            var currentUser = HttpContext.User;
+            var userEmail = currentUser.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+
+            return View("HomeLogined", userEmail);
         }
     }
 }

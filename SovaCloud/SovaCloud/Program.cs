@@ -4,6 +4,7 @@ using Amazon.SecretsManager.Model;
 using Microsoft.EntityFrameworkCore;
 using SovaCloud.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Amazon.S3;
 
 
 var builder = WebApplication.CreateBuilder(args);

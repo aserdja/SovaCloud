@@ -1,4 +1,4 @@
-﻿@model User
+﻿@model string
 
 @{
     ViewData["Title"] = "Home Page";
@@ -26,7 +26,7 @@
 </head>
 <body>
     <div class="text-center">
-        <h1 class="display-4">Welcome to SovaCloud, @Model.EmailAddress.</h1>
+        <h1 class="display-4">Welcome to SovaCloud, @Model</h1>
         <p>Place, where you can keep your secrets!</p>
     </div>
 </body>

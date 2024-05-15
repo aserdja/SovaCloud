@@ -17,7 +17,6 @@ namespace SovaCloud.Controllers
             _context = context;
         }
 
-
         public IActionResult SignIn()
         {
             ClaimsPrincipal claimUser = HttpContext.User;
@@ -36,14 +35,14 @@ namespace SovaCloud.Controllers
 
             if (userRepository.GetByEmailAndPassword(user.EmailAddress, user.Password).Result != null)
             {
-                List<Claim> claims = new() { new Claim(ClaimTypes.NameIdentifier, user.EmailAddress) };
+                List<Claim> claims = new() { new Claim(ClaimTypes.Email, user.EmailAddress) };
                 ClaimsIdentity claimsIdentity = new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 AuthenticationProperties properties = new() { AllowRefresh = true };
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity),
                     properties);
 
-                return RedirectToAction("HomeLogined", "Home", user);
+                return RedirectToAction("HomeLogined", "Home");
             }
             return View();
         }
@@ -69,14 +68,14 @@ namespace SovaCloud.Controllers
                     _context.Users.Add(user);
                     await _context.SaveChangesAsync();
 
-                    List<Claim> claims = new() { new Claim(ClaimTypes.NameIdentifier, user.EmailAddress) };
+                    List<Claim> claims = new() { new Claim(ClaimTypes.Email, user.EmailAddress) };
                     ClaimsIdentity claimsIdentity = new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     AuthenticationProperties properties = new() { AllowRefresh = true };
                     
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity),
                         properties);
 
-                    return RedirectToAction("HomeLogined", "Home", user);
+                    return RedirectToAction("HomeLogined", "Home");
                 }
                 catch 
                 {

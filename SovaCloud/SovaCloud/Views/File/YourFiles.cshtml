@@ -1,0 +1,118 @@
+﻿@model IFormFile
+@{
+	ViewData["Title"] = "Your files";
+	Layout = "~/Views/Shared/_LayoutLogined.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+	<style>
+		main {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		body {
+			font-family: 'Montserrat', sans-serif;
+		}
+
+		.button {
+			font-weight: bold;
+			font-size: 14px;
+			display: block;
+			height: 45px;
+			width: 100%;
+			background: #247FFF;
+			border-radius: 5px;
+			color: #FFF;
+			text-transform: uppercase;
+			text-align: center;
+			line-height: 45px;
+			margin-bottom: 13px;
+			cursor: pointer;
+		}
+
+		.line-between {
+			border-bottom: 1px solid grey;
+			align-content: center;
+			width: 50%;
+			margin-top: 20px;
+			margin-bottom: 40px;
+		}
+
+		table.center-table {
+			margin: 0 auto; /* Выравнивание по центру */
+			border-collapse: collapse; /* Объединение границ */
+			width: 80%; /* Ширина таблицы */
+			font-family: 'Montserrat', sans-serif;
+		}
+
+		th, td {
+			border-bottom: 1px solid black; /* Горизонтальные разделители */
+			padding: 10px; /* Отступ вокруг содержимого ячеек */
+		}
+
+		th {
+			width: 30px;
+		}
+
+		thead {
+			font-size: 24px;
+			font-weight: 200;
+		}
+
+		tbody {
+			font-size: 16px;
+			font-weight: 300;
+			font-style: italic;
+		}
+	</style>
+</head>
+<body>
+	<div class="text-center">
+		<h1 class="display-4">Your files</h1>
+	</div>
+	<div class="line-between"></div>
+	<div class="align-content-center">
+		<form method="post" enctype="multipart/form-data" action="/File/UploadNewFile">
+			<input type="file" name="file" id="file" class="form-control"/>
+			<button type="submit" value="YourFiles" class="button">Upload new file!</button>
+		</form>
+	</div>
+	<div class="line-between"></div>
+
+	<table class="center-table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Time Added</th>
+				<th>Type</th>
+				<th>Size</th>
+				<th>Download Link</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>fjsdlkfewr.png</th>
+				<th>10.05.2024 18:09</th>
+				<th>.png</th>
+				<th>0.236 Mb</th>
+				<th><a href="#">Download</a></></th>
+			</tr>
+			<tr>
+				<th>QkFcBTKhIuk.jpg</th>
+				<th>13.05.2024 16:53</th>
+				<th>.jpg</th>
+				<th>0.324 Mb</th>
+				<th><a href="#">Download</a></></th>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SovaCloud.Data;
 using SovaCloud.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SovaCloud.Repositories
 {
@@ -25,5 +27,18 @@ namespace SovaCloud.Repositories
             }
             return null;
         }
-    }
+
+        public async Task<User?> GetByEmail(string email)
+        {
+            var query = _context.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.EmailAddress == email);
+
+            if (query.Result != null)
+            {
+                return await query;
+            }
+            return null;
+        }   
+	}
 }

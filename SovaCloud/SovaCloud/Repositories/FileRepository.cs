@@ -14,12 +14,12 @@ namespace SovaCloud.Repositories
             _context = context;
         }
 
-        public async void AddNew(IFormFile file, string s3BucketWay)
+        public async Task AddNew(IFormFile file, string s3BucketWay)
         {
             var newFile = new Models.File
             {
                 Name = file.FileName,
-                Size = file.Length / 1024,
+                Size = file.Length / (decimal)1000000,
                 Type = file.ContentType,
                 DateTimeAdded = DateTime.Now,
                 S3BucketWay = $"{s3BucketWay}"
@@ -32,7 +32,6 @@ namespace SovaCloud.Repositories
         public async Task<Models.File?> GetByName(string fileName)
         {
             var query = _context.Files
-                .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Name == fileName);
             
 			if (query != null)
@@ -41,5 +40,30 @@ namespace SovaCloud.Repositories
 			}
 			return null;
 		}
+
+        public async Task<List<Models.File>> GetListByEmail(string email)
+        {
+            var query = _context.Files
+                .Where(x => x.S3BucketWay.Substring(0, email.Length) == email)
+                .ToListAsync();
+
+            if (query != null)
+            {
+                return await query;
+            }
+            return null;
+        }
+
+        public async Task DeleteOne(string fileName)
+        {
+            var query = _context.Files
+                .FirstAsync(x => x.S3BucketWay == fileName);
+
+            if (query != null) 
+            {
+                _context.Files.Remove(query.Result);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

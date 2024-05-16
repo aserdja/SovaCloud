@@ -27,7 +27,7 @@ namespace SovaCloud.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadNewFile(IFormFile file)
         {
-            var bucketExists = await Amazon.S3.Util.AmazonS3Util.DoesS3BucketExistV2Async(_s3Client, _bucketName);
+			var bucketExists = await Amazon.S3.Util.AmazonS3Util.DoesS3BucketExistV2Async(_s3Client, _bucketName);
             if (!bucketExists)
             {
                 return NotFound($"Bucket {_bucketName} does not found!");
@@ -70,7 +70,7 @@ namespace SovaCloud.Controllers
         [HttpPost]
         public async Task<IActionResult> DownloadFile([FromForm] string fileName)
         {
-            try
+			try
             {
                 var request = new GetObjectRequest
                 {
@@ -93,7 +93,7 @@ namespace SovaCloud.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteFile([FromForm] string fileName)
         {
-            try
+			try
             {
                 var request = new DeleteObjectRequest
                 {
@@ -118,7 +118,12 @@ namespace SovaCloud.Controllers
         [Authorize]
         public IActionResult YourFiles()
         {
-            var fileRepository = new FileRepository(_context);
+			ClaimsPrincipal claimUser = HttpContext.User;
+			if (!claimUser.Identity.IsAuthenticated)
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			var fileRepository = new FileRepository(_context);
             var fileList = fileRepository.GetListByEmail(GetCurrentUserPrefix()).Result;
 
             return View("YourFiles", fileList);

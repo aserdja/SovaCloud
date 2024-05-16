@@ -32,7 +32,7 @@ namespace SovaCloud.Controllers
         public async Task<IActionResult> SignIn([FromForm] User user)
         {
             var userRepository = new UserRepository(_context);
-
+            ValidateAuthorizationFormFields(user);
             if (userRepository.GetByEmailAndPassword(user.EmailAddress, user.Password).Result != null)
             {
                 List<Claim> claims = new() { new Claim(ClaimTypes.Email, user.EmailAddress) };
@@ -94,7 +94,7 @@ namespace SovaCloud.Controllers
             return RedirectToAction("SignIn", "Account");
         }
 
-        public void ValidateRegistrationFormFields(User user)
+        private void ValidateRegistrationFormFields(User user)
         {
             if (string.IsNullOrEmpty(user.EmailAddress))
             {
@@ -110,6 +110,18 @@ namespace SovaCloud.Controllers
             {
                 ModelState.AddModelError(nameof(user.Password), "The values ​​of the \"Password\" and \"Confirm Password\" fields are not identical");
             }
+        }
+
+        private void ValidateAuthorizationFormFields(User user)
+        {
+            if (string.IsNullOrEmpty(user.EmailAddress))
+            {
+				ModelState.AddModelError(nameof(user.EmailAddress), "Enter a correct E-Mail address");
+			}
+            if (!string.IsNullOrEmpty(user.Password)) 
+            {
+				ModelState.AddModelError(nameof(user.Password), "Enter a correct Password");
+			}
         }
     }
 }
